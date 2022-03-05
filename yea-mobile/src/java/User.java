@@ -33,7 +33,8 @@ public class User {
     private boolean active;
 
     public String save(){  
-        return "index.xhtml";
+        // TODO: Validate all user fields & save to database
+        return "user.xhtml";
     }
 
     
