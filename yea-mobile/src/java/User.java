@@ -3,9 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
  */
 
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.Date;
+import java.util.Map;
+import javax.faces.context.FacesContext;
+
+
 /**
  *
  * @author assafliron
@@ -19,8 +24,7 @@ public class User {
      */
     public User() {
     }
-    
-    
+
     private String username;
     private String firstName;
     private String lastName;
@@ -32,13 +36,50 @@ public class User {
     private boolean manager;
     private boolean active;
 
-    public String save(){  
+    public String save() {
         // TODO: Validate all user fields & save to database
-        return "user.xhtml";
+        // TODO: If isNewUser - validate that the username doesn't already exist
+        // TODO: If not isNewUser - update 
+        return "/index.xhtml?faces-redirect=true";
     }
 
+    public ArrayList<User> getUsersList() {
+        // TODO: return the users from the Data base instead of a static list
+        ArrayList<User> usersList = new ArrayList<User>() {{
+          User user = new User();
+          user.setUsername("assaflir");
+          user.setFirstName("assaf");
+          user.setLastName("Liron");
+          user.setEmail("aa@gmail.com");
+          user.setManager(true);
+          user.setActive(true);
+          add(user);
+        }};
+
+        return usersList;
+    }
+
+    public String edit(String username) {
+        User user = null;
+        // TODO: return the user from the data base instead of from the static list
+        for (User u : getUsersList()) {
+            if (username.equals(u.username)) {
+                user = u;
+                break;
+            }
+        }
+        
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        sessionMap.put("user", user);
+        return "/user.xhtml?faces-redirect=true";
+    }
     
-    
+    public String delete(String username) {
+        // TODO: delete the user from the database
+        
+        return "/index.xhtml?faces-redirect=true";
+    }
+
     public String getUsername() {
         return username;
     }

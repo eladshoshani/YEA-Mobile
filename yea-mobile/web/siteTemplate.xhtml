@@ -29,48 +29,50 @@
     </h:head>
 
     <h:body>
-
-        <div id="top" class="navbar">
-            <!-- Edit menu to include all relevant options -->
-            <!-- Edit menu to call relevant functions -->
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>                        
-                        </button>
-                        <a class="navbar-brand" href="#">Logo</a>
+        <h:form>
+            <div id="top" class="navbar">
+                <!-- Edit menu to include all relevant options -->
+                <!-- Edit menu to call relevant functions -->
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>                        
+                            </button>
+                            <a class="navbar-brand" href="#">Logo</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="./productions.xhtml?faces-redirect=true">Products</a></li>
+                                <!-- TODO: Show only if the connected user is a manager --> 
+                                <li><a href="./users.xhtml?faces-redirect=true">Users</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <!-- TODO: Show only if there is a connected user -->
+                                <li><h:commandLink value = "Your Account" action = "#{user.edit()}" /></li>
+                                <!-- TODO: Show only if there is a connected user -->
+                                <li><h:commandLink value = "Cart" action = "#{user.getCart()}" /></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="collapse navbar-collapse" id="myNavbar">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Products</a></li>
-                            <li><a href="#">Deals</a></li>
-                            <li><a href="#">Stores</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div>
-<!--            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-            </div>-->
-            <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                </nav>
             </div>
-        </div>
-<!--        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>-->
-
+            <div>
+                <!--            <div id="left">
+                                <ui:insert name="left">Left</ui:insert>
+                            </div>-->
+                <div id="content" class="left_content">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+            </div>
+            <!--        <div id="bottom">
+                        <ui:insert name="bottom">Bottom</ui:insert>
+                    </div>-->
+        </h:form>
     </h:body>
 
 </html>
