@@ -43,13 +43,14 @@ public class User {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public ArrayList<User> getUsersList() {
+    public static ArrayList<User> getUsersList() {
         // TODO: return the users from the Data base instead of a static list
         ArrayList<User> usersList = new ArrayList<User>() {{
           User user = new User();
           user.setUsername("assaflir");
           user.setFirstName("assaf");
           user.setLastName("Liron");
+          user.setPassword("aaaa");
           user.setEmail("aa@gmail.com");
           user.setManager(true);
           user.setActive(true);
@@ -59,7 +60,7 @@ public class User {
         return usersList;
     }
 
-    public String edit(String username) {
+    public static String edit(String username) {
         User user = null;
         // TODO: return the user from the data base instead of from the static list
         for (User u : getUsersList()) {
@@ -74,10 +75,21 @@ public class User {
         return "/user.xhtml?faces-redirect=true";
     }
     
-    public String delete(String username) {
+    public static String delete(String username) {
         // TODO: delete the user from the database
         
         return "/index.xhtml?faces-redirect=true";
+    }
+    
+    public static User find(String username, String password) {
+        // TODO: return the user in the DB with the received username and password
+        // TODO: if there is no such user - return null
+        for (User user : getUsersList()) {
+            if (user.username.equals(username) && user.password.equals(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public String getUsername() {

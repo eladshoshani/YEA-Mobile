@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -53,7 +54,16 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <!-- TODO: Show only if there is a connected user -->
-                                <li><h:commandLink value = "Your Account" action = "#{user.edit()}" /></li>
+                                <c:choose>
+                                    <c:when test="#{loginController.isUserLoggedIn()}">
+                                        <li><h:commandLink value = "Your Account" action = "#{user.edit(loggedUser.username)}" /></li>
+                                        <li><h:commandLink value = "Logout" action = "#{loginController.logout()}" /></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><h:commandLink value = "Login" action = "login.xhtml?faces-redirect=true" /></li>
+                                    </c:otherwise>
+                                </c:choose>
+                                
                                 <!-- TODO: Show only if there is a connected user -->
                                 <li><h:commandLink value = "Cart" action = "#{user.getCart()}" /></li>
                             </ul>
@@ -61,6 +71,7 @@
                     </div>
                 </nav>
             </div>
+            
             <div>
                 <!--            <div id="left">
                                 <ui:insert name="left">Left</ui:insert>
