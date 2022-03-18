@@ -8,7 +8,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"></link>
-        <title>Facelets Template</title>
+        <title>Site Template</title>
         <style>
             /* Remove the navbar's default rounded borders and increase the bottom margin */
             .navbar {
@@ -42,36 +42,37 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>                        
                             </button>
-                            <a class="navbar-brand" href="#">Logo</a>
+                            <a class="navbar-brand" href="#">TODO: Add Logo</a>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">Home</a></li>
-                                <li><a href="./productions.xhtml?faces-redirect=true">Products</a></li>
-                                <!-- TODO: Show only if the connected user is a manager --> 
-                                <li><a href="./users.xhtml?faces-redirect=true">Users</a></li>
+                                <li><a href="./products.xhtml?faces-redirect=true">Products</a></li>
+                                <c:if test="#{loginController.isManagerLoggedIn()}">
+                                    <li><a href="./users.xhtml?faces-redirect=true">Users</a></li>
+                                </c:if>
+
                                 <li><a href="#">Contact</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <!-- TODO: Show only if there is a connected user -->
                                 <c:choose>
                                     <c:when test="#{loginController.isUserLoggedIn()}">
                                         <li><h:commandLink value = "Your Account" action = "#{user.edit(loggedUser.username)}" /></li>
-                                        <li><h:commandLink value = "Logout" action = "#{loginController.logout()}" /></li>
+                                        <li><h:commandLink value = "Logout" action = "#{loginController.logout()}"/></li>
                                     </c:when>
                                     <c:otherwise>
                                         <li><h:commandLink value = "Login" action = "login.xhtml?faces-redirect=true" /></li>
                                     </c:otherwise>
                                 </c:choose>
-                                
-                                <!-- TODO: Show only if there is a connected user -->
-                                <li><h:commandLink value = "Cart" action = "#{user.getCart()}" /></li>
+                                <c:if test="#{loggedUser.manager}">
+                                    <li><h:commandLink value = "Cart" action = "#{user.getCart()}" /></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
-            
+
             <div>
                 <!--            <div id="left">
                                 <ui:insert name="left">Left</ui:insert>

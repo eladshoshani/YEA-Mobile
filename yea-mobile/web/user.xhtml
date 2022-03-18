@@ -15,103 +15,102 @@
             <ui:define name="content">
                 
                 <h:form id="form" class="form-horizontal">  
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <div class="col-sm-4"></div>  
                         <div  class="col-sm-4">  
                             <h2 style="text-align: center">User Details</h2>  
                         </div>  
                     </div>  
                     <hr/>  
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <h:outputLabel for="username" class="control-label col-sm-4">User Name</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="username-id" value="#{user.username}" class="form-control"   
                                          validatorMessage="Username is required">  
-                                <f:validateRequired />  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="password" class="control-label col-sm-4">First Name</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="firstName" class="control-label col-sm-4">First Name</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="firstName-id" value="#{user.firstName}" class="form-control"   
                                          validatorMessage="First name is required">  
-                                <f:validateRequired/>  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="password" class="control-label col-sm-4">Last Name</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="lastName" class="control-label col-sm-4">Last Name</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="lastName-id" value="#{user.lastName}" class="form-control"   
                                          validatorMessage="Last name is required">  
-                                <f:validateRequired/>  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <h:outputLabel for="email" class="control-label col-sm-4">Your Email</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="email-id" value="#{user.email}" class="form-control"   
                                          validatorMessage="Email is required">  
-                                <f:validateRequired/>  
                             </h:inputText>  
                         </div>  
                     </div>  
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <h:outputLabel for="password" class="control-label col-sm-4">Password</h:outputLabel>  
                         <div class="col-sm-4">  
-                            <h:inputSecret id="password-id" value="#{user.password}" class="form-control"   
+                            <h:inputText id="password-id" value="#{user.password}" class="form-control"   
                                            validatorMessage="Password is required">  
-                                <f:validateRequired/>  
-                            </h:inputSecret>  
-                        </div>  
-                    </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="password" class="control-label col-sm-4">Phone Number</h:outputLabel>  
-                        <div class="col-sm-4">  
-                            <h:inputText id="phoneNumber-id" value="#{user.phoneNumber}" class="form-control"   
-                                         validatorMessage="Phone number is required">  
-                                <f:validateRequired/>  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="password" class="control-label col-sm-4">Birth Date (yyyy-mm-dd)</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="phoneNumber" class="control-label col-sm-4">Phone Number</h:outputLabel>  
+                        <div class="col-sm-4">  
+                            <h:inputText id="phoneNumber-id" value="#{user.phoneNumber}" class="form-control"   
+                                         validatorMessage="Phone number is required">  
+                            </h:inputText>  
+                        </div>  
+                    </div>
+                    <div class="form-group row">  
+                        <h:outputLabel for="birthDate" class="control-label col-sm-4">Birth Date (yyyy-mm-dd)</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText  id="birthDate-id" value="#{user.birthDate}" class="form-control"   
                                           validatorMessage="Birth date is required">  
-                                <f:validateRequired/>  
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>  
                             </h:inputText >  
                         </div>  
                     </div>
-                    <c:if test="#{user.manager}">
-                        <div class="form-group">  
-                            <h:outputLabel for="password" class="control-label col-sm-4">The User is a Manager</h:outputLabel>  
+                    <c:if test="#{loginController.isManagerLoggedIn()}">
+                        <div class="form-group row">  
+                            <h:outputLabel for="manager" class="control-label col-sm-4">The User is a Manager</h:outputLabel>  
                             <div class="col-sm-4">  
                                 <h:selectBooleanCheckbox id="manager-id" value="#{user.manager}" class="form-check-input"   
                                                          validatorMessage="Specify whether the user is a manager">  
-                                    <f:validateRequired/>  
                                 </h:selectBooleanCheckbox>  
                             </div>  
                         </div>
-                        <div class="form-group">  
-                            <h:outputLabel for="password" class="control-label col-sm-4">The User is active</h:outputLabel>  
+                        <div class="form-group row">  
+                            <h:outputLabel for="active" class="control-label col-sm-4">The User is active</h:outputLabel>  
                             <div class="col-sm-4">  
                                 <h:selectBooleanCheckbox id="active-id" value="#{user.active}" class="form-check-input"   
                                                          validatorMessage="Specify whether the user is active">  
-                                    <f:validateRequired/>  
                                 </h:selectBooleanCheckbox>  
                             </div>  
                         </div>
                     </c:if>
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <div class="col-sm-4"></div>  
                         <div class="col-sm-4">  
-                            <div class="col-sm-2">  
-                                <h:commandButton value="Save" action="#{user.save()}" class="btn btn-success"   
+                            <div class="col-sm-2"> 
+                                <c:choose>
+                                    <c:when test="#{user.username == null}">
+                                        <h:commandButton value="Save" action="#{user.save(true)}" class="btn btn-success"   
                                                  style="width: 80px;"></h:commandButton>  
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h:commandButton value="Save" action="#{user.save(false)}" class="btn btn-success"   
+                                                 style="width: 80px;"></h:commandButton>  
+                                    </c:otherwise>
+                                </c:choose>                                
                             </div>  
                             <div class="col-sm-1">  
                             </div>  

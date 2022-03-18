@@ -44,6 +44,12 @@ public class LoginController {
         FacesContext context = FacesContext.getCurrentInstance();
         return context.getExternalContext().getSessionMap().containsKey(LOGGED_USER);
     }
+    
+    public static boolean isManagerLoggedIn() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        return isUserLoggedIn() && 
+                ((User)(context.getExternalContext().getSessionMap().get(LOGGED_USER))).isManager();
+    }
 
     public String getUsername() {
         return username;

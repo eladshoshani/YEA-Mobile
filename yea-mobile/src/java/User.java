@@ -35,8 +35,9 @@ public class User {
     private Date birthDate;
     private boolean manager;
     private boolean active;
+    
 
-    public String save() {
+    public String save(boolean newUser) {
         // TODO: Validate all user fields & save to database
         // TODO: If isNewUser - validate that the username doesn't already exist
         // TODO: If not isNewUser - update 
@@ -90,6 +91,13 @@ public class User {
             }
         }
         return null;
+    }
+    
+    // Redirects to user.xhtml with empty fields, for a user new to be created
+    public static String createNewUser() {
+        Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        sessionMap.put("user", new User());
+        return "/user.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {
