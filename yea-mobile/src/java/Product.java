@@ -37,7 +37,7 @@ public class Product {
         // TODO: Validate all user fields & save to database
         // TODO: If newProduct - validate that the product doesn't already exist
         // TODO: If not newProduct - update  the existing product
-        return "/index.xhtml?faces-redirect=true";
+        return "/product.xhtml?faces-redirect=true";
     }
 
     public static ArrayList<Product> getProductsList() {

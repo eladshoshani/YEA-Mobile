@@ -15,69 +15,69 @@
             <ui:define name="content">
 
                 <h:form id="form" class="form-horizontal">  
-                    <div class="form-group">  
+                    <div class="form-group row">  
                         <div class="col-sm-4"></div>  
                         <div  class="col-sm-4">  
                             <h2 style="text-align: center">Product Details</h2>  
                         </div>  
                     </div>  
                     <hr/>  
-                    <div class="form-group">  
-                        <h:outputLabel for="pid" class="control-label col-sm-4">Product ID</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="pid" class="control-label col-sm-4 text-right">Product ID</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="pid-id" value="#{product.pid}" class="form-control"   
                                          validatorMessage="PID is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="brand" class="control-label col-sm-4">Brand</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="brand" class="control-label col-sm-4 text-right">Brand</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="brand-id" value="#{product.brand}" class="form-control"   
                                          validatorMessage="Brand is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="storageCapacity" class="control-label col-sm-4">Storage Capacity</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="storageCapacity" class="control-label col-sm-4 text-right">Storage Capacity</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="storageCapacity-id" value="#{product.storageCapacity}" class="form-control"   
                                          validatorMessage="Storage Capacity is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="weight" class="control-label col-sm-4">Weight</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="weight" class="control-label col-sm-4 text-right">Weight</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="weight-id" value="#{product.weight}" class="form-control"   
                                          validatorMessage="Weight is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>  
-                    <div class="form-group">  
-                        <h:outputLabel for="operatingSystem" class="control-label col-sm-4">Operating System</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="operatingSystem" class="control-label col-sm-4 text-right">Operating System</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="operatingSystem-id" value="#{product.operatingSystem}" class="form-control"   
                                          validatorMessage="Operating System is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="price" class="control-label col-sm-4">Price</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="price" class="control-label col-sm-4 text-right">Price</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="price-id" value="#{product.price}" class="form-control"   
                                          validatorMessage="Price is required"
-                                          disabled="#{not(loginController.isUserLoggedIn())}">  
+                                         disabled="#{not(loginController.isUserLoggedIn())}">  
                             </h:inputText>  
                         </div>  
                     </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="inStock" class="control-label col-sm-4">In Stock</h:outputLabel>  
+                    <div class="form-group row">  
+                        <h:outputLabel for="inStock" class="control-label col-sm-4 text-right">In Stock</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText  id="inStock-id" value="#{product.inStock}" class="form-control"   
                                           validatorMessage="In stock is required"
@@ -85,8 +85,28 @@
                             </h:inputText>  
                         </div>  
                     </div>
+                    <div class="form-group row">  
+                        <c:choose>
+                                <c:when test="#{loginController.isUserLoggedIn()}">
+                                        <h:outputLabel for="addToCart" class="control-label col-sm-4 text-right">Currently in Cart</h:outputLabel>  
+                                        <div class="col-sm-2 ">  
+                                            <h:inputText  id="inCart-id" value="TODO: num of items in user's cart" class="form-control"   
+                                                          disabled="true">  
+                                            </h:inputText>  
+                                        </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <h:outputLabel for="addToCart" class="control-label col-sm-4 text-right">You must login to add to cart</h:outputLabel>  
+                                </c:otherwise>
+                            </c:choose>
+                            <div class="col-sm-2">  
+                                <h:commandButton value="Add to cart" action="#{loggedUser.addToCart(product)}" class="btn btn-success"   
+                                                 style="width: 120px;"
+                                                 disabled="#{not(loginController.isUserLoggedIn())}"></h:commandButton>  
+                            </div>
+                    </div>
                     <c:if test="#{loginController.isManagerLoggedIn()}">
-                        <div class="form-group">  
+                        <div class="form-group row">  
                             <div class="col-sm-4"></div>  
                             <div class="col-sm-4">  
                                 <div class="col-sm-2"> 
@@ -105,28 +125,7 @@
                                 </div>  
                             </div>  
                         </div>
-                    </c:if>
-
-                    <div class="form-group">  
-                        <div class="col-sm-4"></div>  
-                        <div class="col-sm-4">
-                            <c:choose>
-                                <c:when test="#{loginController.isUserLoggedIn()}">
-                                    <h:outputLabel for="addToCart" class="control-label col-sm-4">In cart: TODO: add number of items</h:outputLabel>  
-                                </c:when>
-                                <c:otherwise>
-                                    <h:outputLabel for="addToCart" class="control-label col-sm-4">You must login to add to cart</h:outputLabel>  
-                                </c:otherwise>
-                            </c:choose>
-                            <div class="col-sm-2">  
-                                <h:commandButton value="Add to cart" action="#{product.save()}" class="btn btn-success"   
-                                                 style="width: 120px;"
-                                                 disabled="#{not(loginController.isUserLoggedIn())}"></h:commandButton>  
-                            </div>  
-                            <div class="col-sm-1">  
-                            </div>  
-                        </div>  
-                    </div>  
+                    </c:if>  
                 </h:form>  
             </ui:define>
         </ui:composition>  
